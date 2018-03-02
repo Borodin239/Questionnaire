@@ -1,19 +1,32 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import Http404
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger #необходимо для переключения между страницами
 
 from .models import Choice, Question
 
-def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'polls/index.html', context)
-    #Выдаёт 5 последних вопросов по дате публикации при переходе на сервис
+
+
+def index(request,):
+    question_list = Question.objects.all()
+    paginator = Paginator(question_list, 10) #Отображает 25 вопрос на странице
+    
+    page = request.GET.get('page')
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
+    
+    return render_to_response('polls/index.html', {"questions": questions})
+
+
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
+
 
 
 def vote(request, question_id):
@@ -34,7 +47,8 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
         #HttpResponseRedirect перенаправляет пользователя в результаты голосованя
 
+
+
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
-

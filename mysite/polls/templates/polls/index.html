@@ -1,9 +1,19 @@
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% for question in questions %}
+<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if questions.has_previous %}
+        <a href="?page={{ questions.previous_page_number }}">previous</a>
+        {% endif %}
+        
+        <span class="current">
+            Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
+        </span>
+        
+        {% if questions.has_next %}
+        <a href="?page={{ questions.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
