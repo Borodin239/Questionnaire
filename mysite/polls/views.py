@@ -9,7 +9,7 @@ from .models import Choice, Question
 
 def index(request,):
     question_list = Question.objects.all()
-    paginator = Paginator(question_list, 10) #Отображает 25 вопрос на странице
+    paginator = Paginator(question_list, 10) #Отображает 10 вопросов на странице
     
     page = request.GET.get('page')
     try:
