@@ -2,14 +2,16 @@ from django.shortcuts import get_object_or_404, render, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger #необходимо для переключения между страницами
+from django.contrib import auth
 
 from .models import Choice, Question
 
 
 
 def index(request,):
+    username = auth.get_user(request).username
     question_list = Question.objects.all()
-    paginator = Paginator(question_list, 10) #Отображает 10 вопросов на странице
+    paginator = Paginator(question_list, 8) #Отображает 8 вопросов на странице
     
     page = request.GET.get('page')
     try:
@@ -19,13 +21,14 @@ def index(request,):
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
     
-    return render_to_response('polls/index.html', {"questions": questions})
+    return render_to_response('polls/index.html', {"questions": questions, "username": username})
 
 
 
 def detail(request, question_id):
+    username = auth.get_user(request).username
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})
+    return render(request, 'polls/detail.html', {'question': question, 'username': username})
 
 
 
