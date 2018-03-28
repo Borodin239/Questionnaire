@@ -2,15 +2,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+            <style>
+                li {
+                    list-style-type: none; /* Убираем маркеры */
+                }
+            </style>
 </head>
 
 {% if username %}
     <ul style="padding-top: 20px;">
-    <a href=»/auth/logout/» class="btn btn-warning" >Log out ({{ username }})</a>
+    <li class="auth_user"> <a href="/auth/logout/" class="btn btn-warning" >Log out ({{ username }})</a></li>
     <ul style="padding: 20px;">
 {% else %}
     <ul style="padding-top: 20px;">
-    <a href=»/auth/login/» class="btn btn-success" >Log in</a>
+    <li class="auth_user"> <a href="/auth/login/" class="btn btn-success" >Log in</a></li>
     <ul style="padding: 20px;">
 {% endif %}
 

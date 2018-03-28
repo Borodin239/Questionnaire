@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'login_auth',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,9 +56,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-              '/Users/evgenijborodin/Python_project/mysite/login_auth/templates',
-        ],
+        'DIRS': '/Users/evgenijborodin/Python_project/mysite/login_auth/templates',
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

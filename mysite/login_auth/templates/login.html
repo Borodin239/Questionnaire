@@ -1,4 +1,4 @@
-{% extends «base.html» %}  # наследуем шаблон от главного шаблона
+{% extends "base.html" %}  # наследуем шаблон от главного шаблона
     {% block login_auth %}
     <div class="login">
         <form action="/auth/login/" method="POST">
@@ -13,4 +13,4 @@
                     <input type="submit" value="Log in">
                         </form>
     </div>
-    {% endblock login_auth %}
+{% endblock login_auth %}
