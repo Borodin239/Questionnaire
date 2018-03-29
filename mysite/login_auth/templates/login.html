@@ -1,16 +1,31 @@
-{% extends "base.html" %}  # наследуем шаблон от главного шаблона
-    {% block login_auth %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+            <style>
+                li {
+                    list-style-type: none; /* Убираем маркеры */
+                }
+            </style>
+</head>
+
+{% block login_auth %}
     <div class="login">
-        <form action="/auth/login/" method="POST">
-            {% csrf_token %} # защита
+        <form action="/auth/login/" method="POST" align="center" style="font-size:20px">
+            {% csrf_token %}
+            <ul style="padding: 120px;">
             <label for="username">User name</label>
             <input type="text" name="username" id="username">
-                <label for="password">Password</label>
+                <ul style="padding: 20px;">
+                <label for="password" style="padding: 4px;">Password</label>
                 <input type="password" name="password" id="password">
-                    {% if login_error %} # если вышла ошибка или такой пользователь не существует
+                    <ul style="padding: 20px;">
+                    {% if login_error %}
                     <label class="error">{{ login_error }}</label>
                     {% endif %}
-                    <input type="submit" value="Log in">
+                    <input type="submit" value="Log in" class="btn btn-success">
                         </form>
+        <ul style="padding: 25px;">
+        <p class="register"><a  href="/auth/register/" class="btn btn-info">Not registered yet? Sign up</a></p>
     </div>
 {% endblock login_auth %}

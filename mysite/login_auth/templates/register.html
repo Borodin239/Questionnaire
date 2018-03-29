@@ -1,0 +1,29 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+            <style>
+                li {
+                    list-style-type: none; /* Убираем маркеры */
+                }
+            </style>
+</head>
+
+{% load staticfiles %}
+
+{% block login_auth %}
+<div  class="wrapp_form">
+    <ul style="padding-top: 120px;">
+    <form action="/auth/register/" method="POST" align="center" style="font-size:20px">
+        {% csrf_token %}
+        {% for field in register_form %}
+        <div class="form-group register_style">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <input  type="submit" value="SIGN UP" class="btn btn-success" >
+            </form>
+</div>
+{% endblock login_auth %}
