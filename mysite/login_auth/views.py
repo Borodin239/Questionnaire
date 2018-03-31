@@ -10,20 +10,21 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = auth.authenticate(username=username, password=password)
-        if user is not None:
+        if user is not None and user.is_active:
             auth.login(request, user)
             return HttpResponseRedirect('/polls')
         else:
             login_error = "User not exist"
             context = {"login_error": login_error}
-            return render(request, '/Users/evgenijborodin/Python_project/mysite/login_auth/templates/login.html', context)
+            return render(request, 'login.html', context)
     else:
-        return render(request, '/Users/evgenijborodin/Python_project/mysite/login_auth/templates/login.html', context) #ОШИБКА
+        return render(request, 'login.html', context)
+
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/polls')
-# модуль производит logout пользователя и перезапускает страницу
+    return HttpResponseRedirect("/auth/login")
+
 
 def register(request):
     context = {} #?

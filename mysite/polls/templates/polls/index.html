@@ -9,15 +9,11 @@
             </style>
 </head>
 
-{% if username %}
-    <ul style="padding-top: 20px;">
-    <li class="auth_user"> <a href="/auth/login/" class="btn btn-warning" >Log out ({{ username }})</a></li>
-    <ul style="padding: 20px;">
-{% else %}
-    <ul style="padding-top: 20px;">
-    <li class="auth_user"> <a href="/auth/login/" class="btn btn-success" >Log in</a></li>
-    <ul style="padding: 20px;">
-{% endif %}
+
+<ul style="padding-top: 20px;">
+<li class="auth_user"> <a href="/auth/logout/" class="btn btn-warning" >Log out ({{ username }})</a></li>
+<ul style="padding: 20px;">
+
 
 
 {% for question in questions %}
